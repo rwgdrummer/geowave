@@ -613,6 +613,12 @@ public class SpatialTemporalQueryIT extends
 			final String name,
 			final Set<String> fidExpectedResults,
 			final Set<String> fidResults ) {
+		if (fidExpectedResults.size() != fidResults.size()) {
+			System.out.println("<-- SPATIALTEMPORALQUERYIT ACUTAL RESULTS -->");
+			for (final String result : fidResults) {
+				System.out.println(result);
+			}
+		}
 		Assert.assertEquals(
 				"Expected result count does not match actual result count for " + name,
 				fidExpectedResults.size(),
