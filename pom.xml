@@ -882,8 +882,8 @@
 			<properties>
 				<!-- <hbase.version>1.0.0-cdh5.5.0</hbase.version> <hadoop.version>2.6.0-cdh5.5.0</hadoop.version> -->
 				<accumulo.version>1.6.0-cdh5.1.4</accumulo.version>
-				<hbase.version>1.0.0-cdh5.4.0</hbase.version>
-				<!--<hbase.version>1.2.0-cdh5.7.1</hbase.version> -->
+				<!--<hbase.version>1.0.0-cdh5.4.0</hbase.version> -->
+				<hbase.version>1.2.0-cdh5.7.1</hbase.version>
 				<hadoop.version>2.6.0-cdh5.4.0</hadoop.version>
 			</properties>
 			<repositories>
