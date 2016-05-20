@@ -138,7 +138,6 @@ public class KMeansParallelJobRunner extends
 						1000));
 
 		ClusteringUtils.createAdapter(propertyManagement);
-		ClusteringUtils.createIndex(propertyManagement);
 
 		return super.run(
 				config,

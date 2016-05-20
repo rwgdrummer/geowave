@@ -127,7 +127,6 @@ public class KMeansJumpJobRunner extends
 				SampleParameters.Sample.INDEX_ID);
 
 		ClusteringUtils.createAdapter(propertyManagement);
-		ClusteringUtils.createIndex(propertyManagement);
 
 		final String currentBatchId = propertyManagement.getPropertyAsString(
 				GlobalParameters.Global.BATCH_ID,

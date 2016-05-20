@@ -108,7 +108,6 @@ public class KMeansSingleSampleJobRunner<T> extends
 				SimpleFeatureGeometryExtractor.class);
 
 		ClusteringUtils.createAdapter(propertyManagement);
-		ClusteringUtils.createIndex(propertyManagement);
 
 		return super.run(
 				config,

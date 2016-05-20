@@ -5,9 +5,9 @@ public class StoreParameters
 	public enum StoreParam
 			implements
 			ParameterEnum {
-		INPUT_STORE(
+		INPUT_STORE(  // the initial data input store for analytics
 				new InputStoreParameterHelper()),
-		OUTPUT_STORE(
+		OUTPUT_STORE(  // store for analytic results
 				new OutputStoreParameterHelper()), ;
 
 		private final ParameterHelper<?> helper;

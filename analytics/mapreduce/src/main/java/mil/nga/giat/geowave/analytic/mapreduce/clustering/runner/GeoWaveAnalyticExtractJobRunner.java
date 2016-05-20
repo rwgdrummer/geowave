@@ -32,6 +32,7 @@ import mil.nga.giat.geowave.analytic.param.ParameterEnum;
 import mil.nga.giat.geowave.analytic.param.StoreParameters;
 import mil.nga.giat.geowave.analytic.param.StoreParameters.StoreParam;
 import mil.nga.giat.geowave.analytic.store.PersistableStore;
+import mil.nga.giat.geowave.core.store.operations.remote.options.DataStorePluginOptions;
 import mil.nga.giat.geowave.core.store.query.DistributableQuery;
 import mil.nga.giat.geowave.mapreduce.GeoWaveConfiguratorBase;
 import mil.nga.giat.geowave.mapreduce.dedupe.GeoWaveDedupeJobRunner;
@@ -220,7 +221,10 @@ public class GeoWaveAnalyticExtractJobRunner extends
 		final PersistableStore store = ((PersistableStore) runTimeProperties.getProperty(StoreParam.INPUT_STORE));
 		setQueryOptions(runTimeProperties.getPropertyAsQueryOptions(ExtractParameters.Extract.QUERY_OPTIONS));
 		dataStoreOptions = store.getDataStoreOptions();
-
+		
+		final PersistableStore outputStore = ((PersistableStore) runTimeProperties.getProperty(StoreParam.OUTPUT_STORE));
+		DataStorePluginOptions outputDataStoreOptions = outputStore.getDataStoreOptions();
+		
 		GeoWaveInputFormat.setDataStoreName(
 				config,
 				dataStoreOptions.getType());
@@ -230,10 +234,10 @@ public class GeoWaveAnalyticExtractJobRunner extends
 
 		GeoWaveOutputFormat.setDataStoreName(
 				config,
-				dataStoreOptions.getType());
+				outputDataStoreOptions.getType());
 		GeoWaveOutputFormat.setStoreConfigOptions(
 				config,
-				dataStoreOptions.getFactoryOptionsAsMap());
+				outputDataStoreOptions.getFactoryOptionsAsMap());
 
 		final FileSystem fs = FileSystem.get(config);
 
@@ -262,6 +266,7 @@ public class GeoWaveAnalyticExtractJobRunner extends
 			ExtractParameters.Extract.QUERY,
 			ExtractParameters.Extract.QUERY_OPTIONS,
 			StoreParam.INPUT_STORE,
+			StoreParam.OUTPUT_STORE,
 			GlobalParameters.Global.BATCH_ID
 		}));
 

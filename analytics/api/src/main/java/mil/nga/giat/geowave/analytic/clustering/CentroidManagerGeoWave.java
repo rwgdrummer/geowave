@@ -116,7 +116,7 @@ public class CentroidManagerGeoWave<T> implements
 {
 	final static Logger LOGGER = LoggerFactory.getLogger(CentroidManagerGeoWave.class);
 	private static final ParameterEnum<?>[] MY_PARAMS = new ParameterEnum[] {
-		StoreParameters.StoreParam.INPUT_STORE,
+		StoreParameters.StoreParam.OUTPUT_STORE,
 		GlobalParameters.Global.BATCH_ID,
 		CentroidParameters.Centroid.DATA_TYPE_ID,
 		CentroidParameters.Centroid.DATA_NAMESPACE_URI,
@@ -240,7 +240,7 @@ public class CentroidManagerGeoWave<T> implements
 		final String indexId = scopedJob.getString(
 				CentroidParameters.Centroid.INDEX_ID,
 				new SpatialDimensionalityTypeProvider().createPrimaryIndex().getId().getString());
-		PersistableStore store = (PersistableStore) StoreParameters.StoreParam.INPUT_STORE.getHelper().getValue(
+		PersistableStore store = (PersistableStore) StoreParameters.StoreParam.OUTPUT_STORE.getHelper().getValue(
 				context,
 				scope,
 				null);

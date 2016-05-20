@@ -61,50 +61,6 @@ public class ClusteringUtils
 
 	}
 
-	public static DataAdapter[] getAdapters(
-			final PropertyManagement propertyManagement )
-			throws IOException {
-
-		PersistableStore store = (PersistableStore) StoreParameters.StoreParam.INPUT_STORE.getHelper().getValue(
-				propertyManagement);
-
-		final AdapterStore adapterStore = store.getDataStoreOptions().createAdapterStore();
-
-		final mil.nga.giat.geowave.core.store.CloseableIterator<DataAdapter<?>> it = adapterStore.getAdapters();
-		final List<DataAdapter> adapters = new LinkedList<DataAdapter>();
-		while (it.hasNext()) {
-			adapters.add(it.next());
-		}
-		it.close();
-		final DataAdapter[] result = new DataAdapter[adapters.size()];
-		adapters.toArray(result);
-		return result;
-	}
-
-	public static PrimaryIndex[] getIndices(
-			final PropertyManagement propertyManagement ) {
-
-		PersistableStore store = (PersistableStore) StoreParameters.StoreParam.INPUT_STORE.getHelper().getValue(
-				propertyManagement);
-
-		final IndexStore indexStore = store.getDataStoreOptions().createIndexStore();
-
-		final mil.nga.giat.geowave.core.store.CloseableIterator<Index<?, ?>> it = indexStore.getIndices();
-		final List<PrimaryIndex> indices = new LinkedList<PrimaryIndex>();
-		while (it.hasNext()) {
-			indices.add((PrimaryIndex) it.next());
-		}
-		try {
-			it.close();
-		}
-		catch (final IOException e) {
-			LOGGER.warn("Unable to close iterator" + e);
-		}
-		final PrimaryIndex[] result = new PrimaryIndex[indices.size()];
-		indices.toArray(result);
-		return result;
-	}
-
 	/*
 	 * Method takes in a polygon and generates the corresponding ranges in a
 	 * GeoWave spatial index
@@ -126,7 +82,7 @@ public class ClusteringUtils
 			final PropertyManagement propertyManagement )
 			throws Exception {
 
-		PersistableStore store = (PersistableStore) StoreParameters.StoreParam.INPUT_STORE.getHelper().getValue(
+		PersistableStore store = (PersistableStore) StoreParameters.StoreParam.OUTPUT_STORE.getHelper().getValue(
 				propertyManagement);
 
 		final IndexStore indexStore = store.getDataStoreOptions().createIndexStore();
@@ -147,7 +103,7 @@ public class ClusteringUtils
 				propertyManagement.getPropertyAsString(
 						CentroidParameters.Centroid.DATA_NAMESPACE_URI,
 						BasicFeatureTypes.DEFAULT_NAMESPACE),
-				((PersistableStore) StoreParameters.StoreParam.INPUT_STORE.getHelper().getValue(
+				((PersistableStore) StoreParameters.StoreParam.OUTPUT_STORE.getHelper().getValue(
 						propertyManagement)).getDataStoreOptions().createAdapterStore(),
 				dimensionExtractorClass.newInstance().getDimensionNames());
 	}
